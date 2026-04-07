@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: test-portal
+    runtime: docker
+    repo: https://github.com/abror27/TEST.git
+    branch: main
+    plan: starter
+    autoDeployTrigger: commit
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOSTNAME
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: DATA_DIR
+        value: /app/storage
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: TEACHER_USERNAME
+        value: ustoz
+      - key: TEACHER_PASSWORD
+        sync: false
+      - key: TEACHER_NAME
+        value: Informatika ustoz
+    disk:
+      name: data
+      mountPath: /app/storage
+      sizeGB: 10
